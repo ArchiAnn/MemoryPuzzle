@@ -18,12 +18,9 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
 
     @Override
     public boolean karteAufdecken(Position p) throws KarteBereitsAufgedecktException, PositionNichtInFeldException, StateException {
-
-
        /* if(this.status != Status.START || this.status != Status.FIRSTCARD || this.status != Status.SECONDCARD ){
             throw new StateException(" aufdecken call but wrong status") ;
         }*/
-
         if (p.getX() < 0 || p.getX() > 1 || p.getY() < 0 || p.getY() > 2) {
             throw new PositionNichtInFeldException();
         }
@@ -32,8 +29,8 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
             throw new KarteBereitsAufgedecktException();
         }
 
-
         gamefield.openPosition(p);
+
         if (turn % 2 == 1){
             rememberX = p.getX();
             rememberY = p.getY();
@@ -50,13 +47,12 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
             else {
                 if (isEnd()) {
                     status = Status.END;
+                    System.out.println("End of the game");
                     return true;
                 }
             }
-
             turn++;
         }
-
         return false;
     }
 
@@ -64,9 +60,10 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
         return gamefield.isAufgedeckt();
     }
 
-    public Gamefield getGamefield() {
+    public Gamefield getGamefield() throws FeldExistiertNichtException  {
+        if(gamefield == null){
+            throw new FeldExistiertNichtException();
+        }
         return gamefield;
     }
-
-
 }

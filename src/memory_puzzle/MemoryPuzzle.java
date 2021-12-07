@@ -37,5 +37,12 @@ public interface MemoryPuzzle {
 
     boolean karteAufdecken(Position p) throws KarteBereitsAufgedecktException, PositionNichtInFeldException, StateException;
 
+    /**
 
+     * @return Gamefield
+     * gibt das Spielfeld zurück
+     *
+     */
+
+    Gamefield getGamefield() throws FeldExistiertNichtException;
 }
