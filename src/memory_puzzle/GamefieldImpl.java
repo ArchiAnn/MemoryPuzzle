@@ -3,13 +3,13 @@ package memory_puzzle;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Gamefield implements GameField {
+public class GamefieldImpl implements GameField {
 
     private Symbol[][] gamefield; //gedeckter Zustand
     private Symbol[][] gamefield2;//aufgedeckter Zustand
 
 
-    public Gamefield() {
+    public GamefieldImpl() {
 
         gamefield = new Symbol[2][3];
         for (int i = 0; i < 2; i++) {
@@ -67,10 +67,7 @@ public class Gamefield implements GameField {
     }
 
     public boolean compareCards(Position p, Position p2){
-        if (gamefield[p.getX()][p.getY()] == gamefield[p2.getX()][p2.getY()]) {
-            return true;
-        }
-        return false;
+        return gamefield[p.getX()][p.getY()] == gamefield[p2.getX()][p2.getY()];
     }
 
     public boolean isGedeckt() {
@@ -102,7 +99,6 @@ public class Gamefield implements GameField {
 
     public void printField() {
         char[][] fieldSymbols = new char[2][3];
-
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 if (gamefield[i][j] == Symbol.Decke) {
@@ -116,11 +112,7 @@ public class Gamefield implements GameField {
                 }
                 else if (gamefield[i][j] == Symbol.Kreuz) {
                     fieldSymbols[i][j] = 'X';
-                }
-
-            }
-        }
-
+                }}}
         System.out.println("        -----       -----       -----\n" +
                 "     1 |  " + fieldSymbols[0][0] + "  |   " +
                 "2 |  " + fieldSymbols[0][1] + "  |   " +
@@ -131,5 +123,4 @@ public class Gamefield implements GameField {
                 "5 |  " + fieldSymbols[1][1] + "  |   " +
                 "6 |  " + fieldSymbols[1][2] + "  |\n" +
                 "        -----       -----       -----\n" );
-    }
-}
+    }}
