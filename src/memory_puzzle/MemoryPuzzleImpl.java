@@ -4,13 +4,13 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
 
     private Status status = Status.START;
 
-    private Gamefield gamefield;
+    private GamefieldImpl gamefieldImpl;
     private boolean compare = false;
     private int rememberX, rememberY, turn;
 
 
     public MemoryPuzzleImpl() {
-        gamefield = new Gamefield();
+        gamefieldImpl = new GamefieldImpl();
         turn = 1;
     }
 
@@ -25,11 +25,11 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
             throw new PositionNichtInFeldException();
         }
 
-        if (gamefield.getPosition(p) != Symbol.Decke) {
+        if (gamefieldImpl.getPosition(p) != Symbol.Decke) {
             throw new KarteBereitsAufgedecktException();
         }
 
-        gamefield.openPosition(p);
+        gamefieldImpl.openPosition(p);
 
         if (turn % 2 == 1){
             rememberX = p.getX();
@@ -39,10 +39,10 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
         }
         else {
             status = Status.SECONDCARD;
-            compare = gamefield.compareCards(new Position(rememberX, rememberY),p);
+            compare = gamefieldImpl.compareCards(new Position(rememberX, rememberY),p);
             if(compare == false){
-                gamefield.closePosition(new Position(rememberX, rememberY));
-                gamefield.closePosition(p);
+                gamefieldImpl.closePosition(new Position(rememberX, rememberY));
+                gamefieldImpl.closePosition(p);
             }
             else {
                 if (isEnd()) {
@@ -57,13 +57,13 @@ public class MemoryPuzzleImpl implements MemoryPuzzle {
     }
 
     private boolean isEnd() {
-        return gamefield.isAufgedeckt();
+        return gamefieldImpl.isAufgedeckt();
     }
 
-    public Gamefield getGamefield() throws FeldExistiertNichtException  {
-        if(gamefield == null){
+    public GamefieldImpl getGamefield() throws FeldExistiertNichtException  {
+        if(gamefieldImpl == null){
             throw new FeldExistiertNichtException();
         }
-        return gamefield;
+        return gamefieldImpl;
     }
 }

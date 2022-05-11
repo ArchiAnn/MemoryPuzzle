@@ -44,5 +44,5 @@ public interface MemoryPuzzle {
      *
      */
 
-    Gamefield getGamefield() throws FeldExistiertNichtException;
+    GamefieldImpl getGamefield() throws FeldExistiertNichtException;
 }
